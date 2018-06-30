@@ -2,13 +2,59 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:DemoAnimations"
+             xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
              x:Class="DemoAnimations.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-    	<Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Rotate
+            <xamanimation:StoryBoard 
+                x:Key="LogoAnimation"    
+                Target="{x:Reference Logo}">
+                <xamanimation:RelRotateToAnimation   Rotation="360" Duration="750" />
+            </xamanimation:StoryBoard>
+            -->
+
+            
+            <!-- Fade
+            <xamanimation:StoryBoard 
+                x:Key="LogoAnimation"    
+                Target="{x:Reference Logo}">
+                <xamanimation:FadeInAnimation    Duration="750" />
+            </xamanimation:StoryBoard>
+            -->
+
+            <!-- Heart
+            <xamanimation:StoryBoard 
+                x:Key="LogoAnimation"    
+                Target="{x:Reference Logo}">
+                <xamanimation:HeartAnimation    Duration="750" />
+            </xamanimation:StoryBoard> 
+            -->
+            
+            <!-- Translate -->
+            <xamanimation:StoryBoard 
+                x:Key="LogoAnimation"    
+                Target="{x:Reference Logo}">
+                <xamanimation:TranslateToAnimation TranslateY="180"  TranslateX="95"     Duration="750" />
+                <xamanimation:TranslateToAnimation TranslateY="-180" TranslateX="-95"    Duration="750" />
+                <xamanimation:TranslateToAnimation TranslateY="0"    TranslateX="0"      Duration="750" />
+            </xamanimation:StoryBoard>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Image x:Name="Logo"  Source="logo.png" VerticalOptions="CenterAndExpand"/>
+
+            <Button  Text="Start Animation" VerticalOptions="End">
+                <Button.Triggers>
+                    <EventTrigger Event="Clicked">
+                        <xamanimation:BeginAnimation Animation="{StaticResource LogoAnimation}" />
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+        </StackLayout>
+    </ContentPage.Content>
 
 </ContentPage>
